@@ -1,0 +1,367 @@
+.playfair-display-1 > {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  /* variables */
+  --cg-black: rgb(30, 32, 32);
+  --cg-blue: rgb(101, 130, 196);
+  --cg-grey: rgb(232, 232, 232);
+  --cg-darkgrey: rgb(140, 140, 140);
+  --cg-white: rgb(255, 255, 255);
+  --cg-poppy: rgb(160, 170, 190);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background: var(--cg-grey);
+  position: relative;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+}
+
+/* CSS for navigation */
+
+.navbar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 7%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  background-color: var(--cg-white);
+  color: var(--cg-white);
+  padding: 0px 0px;
+}
+
+.blue-text {
+  color: var(--cg-poppy);
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  right: 30px;
+  list-style: none;
+}
+
+.navbar a {
+  color: var(--cg-darkgrey);
+  font-weight: bold;
+  margin: 0 12px;
+  text-decoration: none;
+  letter-spacing: 2px;
+  font-family: "Playfair Display", serif;
+}
+
+.navbar a:hover,
+.navbar a:active,
+.navbar a.active {
+  color: var(--cg-poppy);
+}
+
+.logo a {
+  color: var(--cg-poppy);
+  font-family: "Playfair Display", serif;
+}
+
+.logo a:hover {
+  color: var(--cg-darkgrey);
+  text-decoration: none;
+}
+
+main {
+  padding: 0 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-title {
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-family: "Playfair Display", serif;
+}
+
+/* CSS for portfolio grid */
+/* CSS for portfolio grid */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.project {
+  width: calc(50% - 15px); /* Two items per row with space between */
+  margin-bottom: 30px; /* Spacing between rows */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.project img {
+  width: 100%;
+  height: auto;
+  border-radius: 7px;
+}
+
+.project-details {
+  background-color: var(--cg-white);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 1.5;
+  text-align: center;
+  width: 100%;
+  border-radius: 0 0 7px 7px;
+  font-weight: lighter;
+}
+
+.project-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    justify-content: center; /* Center items on smaller screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery .project:nth-child(2n) {
+    margin-left: 30px; /* Space between items in the same row */
+  }
+}
+
+/* CSS for home page */
+.about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 143px;
+  margin-top: 30px;
+  background-color: #f8f8f8;
+  border-radius: 7px;
+}
+
+.about-image img,
+.blog-image img {
+  border-radius: 7px;
+}
+
+.blog-image img {
+  margin-left: 200px;
+}
+
+.about-text {
+  flex: 1;
+  margin-left: 100px;
+}
+
+.about-text h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.about-text p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Existing styles */
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.small-button {
+  background-color: var(--cg-poppy);
+  color: var(--cg-white);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: "Playfair Display", serif;
+  text-decoration: none;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.small-button:hover {
+  background-color: var(--cg-white);
+  color: var(--cg-poppy);
+}
+
+/* CSS for resume page */
+.content-container {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.image-container img {
+  width: 550px;
+  border-radius: 7px;
+  margin-right: 20px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.text-above,
+.text-below {
+  margin-top: 20px;
+}
+
+.button {
+  background-color: var(--cg-poppy);
+  color: var(--cg-white);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 150px;
+  font-family: "Playfair Display", serif;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: var(--cg-white);
+  color: var(--cg-poppy);
+}
+
+.resume h2 {
+  font-family: "Playfair Display", serif;
+}
+
+/* CSS for RSVP form */
+.rsvp {
+  width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--cg-white);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.rsvp h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: var(--cg-darkgrey);
+}
+
+.rsvp form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 250px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  font-family: "Playfair Display", serif;
+}
+
+.form-group textarea {
+  width: 450px;
+  min-height: 150px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: "Playfair Display", serif;
+}
+
+#add-attendee {
+  width: 150px;
+  align-self: flex-center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: var(--cg-poppy);
+  color: var(--cg-white);
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#add-attendee:hover {
+  color: var(--cg-poppy);
+  background-color: var(--cg-white);
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+  color: #aaa;
+}
+
+/* CSS for registry */
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.registry-image-link img {
+  width: 200px;
+  height: auto;
+  margin-top: 100px;
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+/* CSS for footer */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--cg-black);
+  color: var(--cg-white);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+}
