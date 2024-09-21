@@ -17,13 +17,35 @@
       <ul class="nav-list">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="classes.html">Classes</a></li>
-        <li><a href="orders.html">Orders</a></li>
+        <!-- <li><a href="classes.html">Classes</a></li> -->
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="orders.html">Order</a></li>
       </ul>
     </nav>
     <main>
-      <img src="Apt door.jpg" alt="Apartment Door" />
-      <h1>Welcome to the Apartment D Bakery</h1>
+      <img src="Apt door.jpg" />
+      <h1 class="page-title">Welcome to the Apartment D Bakery</h1>
+      <h1 class="page-subtitle">Est. 2024</h1>
     </main>
+
+    <script>
+      const fetchMenuData = () => {
+        return fetch(
+          "https://script.google.com/macros/s/AKfycbwGGpygUq71_FhsoJZxJFJ0VpSdiyeBFfUbWPOHDK8G-IGW5-KQkTzPfa-QBbLEUO31Vg/exec"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            // Update the data in local storage every time the home page is loaded
+            localStorage.setItem("menuData", JSON.stringify(data));
+            console.log("Menu data updated in local storage.");
+          })
+          .catch((err) => console.error("Error fetching menu data:", err));
+      };
+
+      // Preload and update menu data as soon as the user lands on the home page
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchMenuData(); // Always fetch and update the menu data
+      });
+    </script>
   </body>
 </html>

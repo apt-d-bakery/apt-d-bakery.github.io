@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" type="image/x-icon" href="Apt-door-d.ico" />
+    <title>Apt D</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <h1 class="logo">
+        <a href="index.html">Apartment D Bakery</a>
+      </h1>
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <!-- <li><a href="classes.html">Classes</a></li> -->
+        <li><a href="menu.html" class="active">Menu</a></li>
+        <li><a href="orders.html">Order</a></li>
+      </ul>
+    </nav>
+
+    <h1 class="page-title">Menu</h1>
+
+    <main id="menu"></main>
+    <!-- Add this element where the menu will appear -->
+
+    <script>
+      const fetchMenuData = () => {
+        return fetch(
+          "https://script.google.com/macros/s/AKfycbwGGpygUq71_FhsoJZxJFJ0VpSdiyeBFfUbWPOHDK8G-IGW5-KQkTzPfa-QBbLEUO31Vg/exec"
+        )
+          .then((response) => response.json())
+          .then((fetchedData) => {
+            const cachedData = JSON.parse(localStorage.getItem("menuData"));
+
+            // Only update local storage and page if the data is different
+            if (JSON.stringify(fetchedData) !== JSON.stringify(cachedData)) {
+              localStorage.setItem("menuData", JSON.stringify(fetchedData));
+              loadMenuData(fetchedData); // Update the page with new data
+            } else {
+              console.log(
+                "Fetched data is the same as cached data. No update necessary."
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching menu data:", error);
+          });
+      };
+
+      const loadMenuData = (data) => {
+        const menuDiv = document.getElementById("menu");
+        menuDiv.innerHTML = ""; // Clear existing content
+
+        data.forEach((item) => {
+          menuDiv.innerHTML += `
+              <h2>${item.item}</h2>
+              <p>${item.description}</p>
+              <p>Price: ${item.price}</p>
+            `;
+        });
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check if menu data exists in local storage
+        let cachedMenuData = localStorage.getItem("menuData");
+
+        if (cachedMenuData) {
+          // Use cached data from local storage
+          loadMenuData(JSON.parse(cachedMenuData));
+        }
+
+        // Fetch fresh data in the background and compare
+        fetchMenuData();
+      });
+    </script>
+
+    <!-- <script>
+      const fetchMenuData = () => {
+        return fetch(
+          "https://script.google.com/macros/s/AKfycbwGGpygUq71_FhsoJZxJFJ0VpSdiyeBFfUbWPOHDK8G-IGW5-KQkTzPfa-QBbLEUO31Vg/exec"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            // Store the data in local storage for future use
+            localStorage.setItem("menuData", JSON.stringify(data));
+            return data;
+          });
+      };
+
+      const loadMenuData = (data) => {
+        const menuDiv = document.getElementById("menu");
+        menuDiv.innerHTML = ""; // Clear existing content
+
+        data.forEach((item) => {
+          menuDiv.innerHTML += `
+              <h2>${item.item}</h2>
+              <p>${item.description}</p>
+              <p>Price: ${item.price}</p>
+            `;
+        });
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check if menu data exists in local storage
+        let menuData = localStorage.getItem("menuData");
+
+        if (menuData) {
+          // Use cached data from local storage
+          loadMenuData(JSON.parse(menuData));
+        } else {
+          // Fetch from Google Sheets API and display
+          fetchMenuData().then(loadMenuData);
+        }
+      });
+    </script> -->
+  </body>
+</html>
