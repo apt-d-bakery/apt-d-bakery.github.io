@@ -17,13 +17,117 @@
       <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <!-- <li><a href="classes.html">Classes</a></li> -->
         <li><a href="menu.html">Menu</a></li>
         <li><a href="orders.html" class="active">Order</a></li>
       </ul>
     </nav>
     <main>
-      <p>Venmo: apt-D-bakery</p>
+      <p>Venmo: apt-D-bakery or cash when you pick up</p>
+
+      <!-- Formspree Form -->
+      <form action="https://formspree.io/f/mzzplgql" method="POST">
+        <!-- Name Field -->
+        <label>
+          Your name: <span style="color: red">*</span>
+          <input type="text" name="name" required />
+        </label>
+        <br />
+
+        <!-- Phone Number Field -->
+        <label>
+          Phone number:
+          <input
+            type="tel"
+            name="phone"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="123-456-7890"
+          />
+        </label>
+        <br />
+
+        <!-- Email Field -->
+        <label>
+          Email: <span style="color: red">*</span>
+          <input type="email" name="email" required />
+        </label>
+        <br />
+
+        <!-- Dropdown for Item Selection -->
+        <label>
+          Item: <span style="color: red">*</span>
+          <select name="item" id="itemDropdown" required>
+            <option value="">Select an item</option>
+          </select>
+        </label>
+        <br />
+
+        <!-- Dropdown for Quantity Selection -->
+        <label>
+          Quantity: <span style="color: red">*</span>
+          <select name="quantity" id="quantityDropdown" required>
+            <option value="">Select quantity</option>
+          </select>
+        </label>
+        <br />
+
+        <!-- Message Field -->
+        <label>
+          Optional special instructions:
+          <textarea name="message"></textarea>
+        </label>
+        <br />
+
+        <button type="submit">Send</button>
+      </form>
+
+      <!-- Script to populate the dropdown from Google Sheets API -->
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const itemDropdown = document.getElementById("itemDropdown");
+          const quantityDropdown = document.getElementById("quantityDropdown");
+
+          // Fetch data from Google Sheets
+          fetch(
+            "https://script.google.com/macros/s/AKfycbzOdUgRpxzPPgnz252MYZCcaHGbpHd_dMMYRdVWzwyV30xOZGPJ6ZJmKAVR-HKZD4tq1Q/exec"
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              // Populate item dropdown with items from Column A
+              data.forEach((item) => {
+                const option = document.createElement("option");
+                option.value = item.item; // Assuming "item" is the key from Column A
+                option.text = item.item; // Display the text from Column A
+                itemDropdown.appendChild(option);
+              });
+
+              // Listen for changes on the item dropdown
+              itemDropdown.addEventListener("change", function () {
+                // Clear existing quantity options
+                quantityDropdown.innerHTML =
+                  '<option value="">Select quantity</option>';
+
+                // Find selected item
+                const selectedItem = data.find(
+                  (item) => item.item === itemDropdown.value
+                );
+
+                if (selectedItem && selectedItem.quantity) {
+                  // Assuming "quantity" is a space-separated string like "1 2 3 4 5"
+                  const quantities = selectedItem.quantity.split(" ");
+                  quantities.forEach((qty) => {
+                    const option = document.createElement("option");
+                    option.value = qty;
+                    option.text = qty;
+                    quantityDropdown.appendChild(option);
+                  });
+                }
+              });
+            })
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+            });
+        });
+      </script>
     </main>
   </body>
 </html>
