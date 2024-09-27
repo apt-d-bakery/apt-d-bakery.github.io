@@ -31,7 +31,7 @@
     <script>
       const fetchMenuData = () => {
         return fetch(
-          "https://script.google.com/macros/s/AKfycbwGGpygUq71_FhsoJZxJFJ0VpSdiyeBFfUbWPOHDK8G-IGW5-KQkTzPfa-QBbLEUO31Vg/exec"
+          "https://script.google.com/macros/s/AKfycbyAQSJlqFcLF-guna9t0rqWYmk7XFFbQhgSpF1lRG24lfw-6-KGmrKDOnL8rmvkHFOZpw/exec"
         )
           .then((response) => response.json())
           .then((fetchedData) => {
@@ -57,11 +57,21 @@
         menuDiv.innerHTML = ""; // Clear existing content
 
         data.forEach((item) => {
+          let formattedQuantityPrice = "Price information not available";
+
+          // Check if "Quantity:Price" exists and is not undefined
+          if (item["Quantity:Price"]) {
+            formattedQuantityPrice = item["Quantity:Price"]
+              .split(" ")
+              .map((qp) => qp.replace(":", " for $"))
+              .join(" or ");
+          }
+
           menuDiv.innerHTML += `
-              <h2>${item.item}</h2>
-              <p>${item.description}</p>
-              <p>Price: ${item.price}</p>
-            `;
+            <h2>${item.item || "Unnamed Item"}</h2>
+            <p>${item.description || "No description available"}</p>
+            <p>${formattedQuantityPrice}</p>
+          `;
         });
       };
 
@@ -78,45 +88,5 @@
         fetchMenuData();
       });
     </script>
-
-    <!-- <script>
-      const fetchMenuData = () => {
-        return fetch(
-          "https://script.google.com/macros/s/AKfycbwGGpygUq71_FhsoJZxJFJ0VpSdiyeBFfUbWPOHDK8G-IGW5-KQkTzPfa-QBbLEUO31Vg/exec"
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            // Store the data in local storage for future use
-            localStorage.setItem("menuData", JSON.stringify(data));
-            return data;
-          });
-      };
-
-      const loadMenuData = (data) => {
-        const menuDiv = document.getElementById("menu");
-        menuDiv.innerHTML = ""; // Clear existing content
-
-        data.forEach((item) => {
-          menuDiv.innerHTML += `
-              <h2>${item.item}</h2>
-              <p>${item.description}</p>
-              <p>Price: ${item.price}</p>
-            `;
-        });
-      };
-
-      document.addEventListener("DOMContentLoaded", () => {
-        // Check if menu data exists in local storage
-        let menuData = localStorage.getItem("menuData");
-
-        if (menuData) {
-          // Use cached data from local storage
-          loadMenuData(JSON.parse(menuData));
-        } else {
-          // Fetch from Google Sheets API and display
-          fetchMenuData().then(loadMenuData);
-        }
-      });
-    </script> -->
   </body>
 </html>

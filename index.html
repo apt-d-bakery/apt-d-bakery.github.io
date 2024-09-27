@@ -17,13 +17,12 @@
       <ul class="nav-list">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <!-- <li><a href="classes.html">Classes</a></li> -->
         <li><a href="menu.html">Menu</a></li>
         <li><a href="orders.html">Order</a></li>
       </ul>
     </nav>
     <main>
-      <img src="Apt door.jpg" />
+      <img src="Apt door.jpg" alt="Apartment D Door" />
       <h1 class="page-title">Welcome to the Apartment D Bakery</h1>
       <h1 class="page-subtitle">Est. 2024</h1>
     </main>
@@ -31,13 +30,22 @@
     <script>
       const fetchMenuData = () => {
         return fetch(
-          "https://script.google.com/macros/s/AKfycbwGGpygUq71_FhsoJZxJFJ0VpSdiyeBFfUbWPOHDK8G-IGW5-KQkTzPfa-QBbLEUO31Vg/exec"
+          "https://script.google.com/macros/s/AKfycbyAQSJlqFcLF-guna9t0rqWYmk7XFFbQhgSpF1lRG24lfw-6-KGmrKDOnL8rmvkHFOZpw/exec"
         )
           .then((response) => response.json())
           .then((data) => {
-            // Update the data in local storage every time the home page is loaded
-            localStorage.setItem("menuData", JSON.stringify(data));
-            console.log("Menu data updated in local storage.");
+            console.log("Fetched data:", data); // Log the fetched data for debugging
+
+            // Process the data to ensure it includes the "Quantity:Price" information
+            const processedData = data.map((item) => ({
+              ...item,
+              "Quantity:Price":
+                item["Quantity:Price"] || "Price information not available",
+            }));
+
+            // Update the data in local storage
+            localStorage.setItem("menuData", JSON.stringify(processedData));
+            console.log("Menu data updated in local storage:", processedData);
           })
           .catch((err) => console.error("Error fetching menu data:", err));
       };

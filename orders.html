@@ -17,19 +17,42 @@
       <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
+        <!-- <li><a href="classes.html">Classes</a></li> -->
         <li><a href="menu.html">Menu</a></li>
         <li><a href="orders.html" class="active">Order</a></li>
       </ul>
     </nav>
     <main>
-      <p>Venmo: apt-D-bakery or cash when you pick up</p>
-
       <!-- Formspree Form -->
       <form action="https://formspree.io/f/mzzplgql" method="POST">
         <!-- Name Field -->
         <label>
           Your name: <span style="color: red">*</span>
           <input type="text" name="name" required />
+        </label>
+        <br />
+
+        <!-- Dropdown for Item Selection -->
+        <!-- <label>
+          Item: <span style="color: red">*</span>
+          <select name="item" id="itemDropdown" required>
+            <option value="">Select an item</option>
+          </select>
+        </label>
+        <br /> -->
+
+        <label>
+          Item: <span style="color: red">*</span>
+          <input type="text" name="item" id="itemDropdown" required>
+          </select>
+        </label>
+        <br /> 
+
+        <!-- Dropdown for Quantity Selection -->
+        <label>
+          Quantity: <span style="color: red">*</span>
+          <input type="text" name="quantity" id="quantityDropdown" required>
+          </select>
         </label>
         <br />
 
@@ -52,24 +75,6 @@
         </label>
         <br />
 
-        <!-- Dropdown for Item Selection -->
-        <label>
-          Item: <span style="color: red">*</span>
-          <select name="item" id="itemDropdown" required>
-            <option value="">Select an item</option>
-          </select>
-        </label>
-        <br />
-
-        <!-- Dropdown for Quantity Selection -->
-        <label>
-          Quantity: <span style="color: red">*</span>
-          <select name="quantity" id="quantityDropdown" required>
-            <option value="">Select quantity</option>
-          </select>
-        </label>
-        <br />
-
         <!-- Message Field -->
         <label>
           Optional special instructions:
@@ -79,55 +84,32 @@
 
         <button type="submit">Send</button>
       </form>
+      <p>Venmo: (Elijah's venmo) or cash when you pick up</p>
 
       <!-- Script to populate the dropdown from Google Sheets API -->
-      <script>
+      <!-- <script>
         document.addEventListener("DOMContentLoaded", () => {
-          const itemDropdown = document.getElementById("itemDropdown");
-          const quantityDropdown = document.getElementById("quantityDropdown");
-
-          // Fetch data from Google Sheets
+          // Function to fetch data from Google Sheets
           fetch(
-            "https://script.google.com/macros/s/AKfycbzOdUgRpxzPPgnz252MYZCcaHGbpHd_dMMYRdVWzwyV30xOZGPJ6ZJmKAVR-HKZD4tq1Q/exec"
+            "https://script.google.com/macros/s/AKfycbyAQSJlqFcLF-guna9t0rqWYmk7XFFbQhgSpF1lRG24lfw-6-KGmrKDOnL8rmvkHFOZpw/exec"
           )
             .then((response) => response.json())
             .then((data) => {
-              // Populate item dropdown with items from Column A
+              const dropdown = document.getElementById("itemDropdown");
+
+              // Assuming data is an array of items from Column A
               data.forEach((item) => {
                 const option = document.createElement("option");
                 option.value = item.item; // Assuming "item" is the key from Column A
                 option.text = item.item; // Display the text from Column A
-                itemDropdown.appendChild(option);
-              });
-
-              // Listen for changes on the item dropdown
-              itemDropdown.addEventListener("change", function () {
-                // Clear existing quantity options
-                quantityDropdown.innerHTML =
-                  '<option value="">Select quantity</option>';
-
-                // Find selected item
-                const selectedItem = data.find(
-                  (item) => item.item === itemDropdown.value
-                );
-
-                if (selectedItem && selectedItem.quantity) {
-                  // Assuming "quantity" is a space-separated string like "1 2 3 4 5"
-                  const quantities = selectedItem.quantity.split(" ");
-                  quantities.forEach((qty) => {
-                    const option = document.createElement("option");
-                    option.value = qty;
-                    option.text = qty;
-                    quantityDropdown.appendChild(option);
-                  });
-                }
+                dropdown.appendChild(option);
               });
             })
             .catch((error) => {
               console.error("Error fetching data:", error);
             });
         });
-      </script>
+      </script> -->
     </main>
   </body>
 </html>
