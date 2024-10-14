@@ -29,48 +29,48 @@
     <!-- Add this element where the menu will appear -->
 
     <script>
-        const fetchMenuData = () => {
-          return fetch(
-            "https://script.google.com/macros/s/AKfycbxWAaIwXx2ybffpA_ZYnBjXQltO03pveN2vrkQ3QDU1OtOQGbp_NOHZHBXw7azPTItY/exec"
-          )
-            .then((response) => response.json())
-            .then((fetchedData) => {
-              const cachedData = JSON.parse(localStorage.getItem("menuData"));
-              // Only update local storage and page if the data is different
-              if (JSON.stringify(fetchedData) !== JSON.stringify(cachedData)) {
-                localStorage.setItem("menuData", JSON.stringify(fetchedData));
-                loadMenuData(fetchedData); // Update the page with new data
-              } else {
-                console.log(
-                  "Fetched data is the same as cached data. No update necessary."
-                );
-              }
-            })
-            .catch((error) => {
-              console.error("Error fetching menu data:", error);
-            });
-        };
-        const loadMenuData = (data) => {
-          const menuDiv = document.getElementById("menu");
-          menuDiv.innerHTML = ""; // Clear existing content
-          data.forEach((item) => {
-            menuDiv.innerHTML += `
+      const fetchMenuData = () => {
+        return fetch(
+          "https://script.google.com/macros/s/AKfycbxWAaIwXx2ybffpA_ZYnBjXQltO03pveN2vrkQ3QDU1OtOQGbp_NOHZHBXw7azPTItY/exec"
+        )
+          .then((response) => response.json())
+          .then((fetchedData) => {
+            const cachedData = JSON.parse(localStorage.getItem("menuData"));
+            // Only update local storage and page if the data is different
+            if (JSON.stringify(fetchedData) !== JSON.stringify(cachedData)) {
+              localStorage.setItem("menuData", JSON.stringify(fetchedData));
+              loadMenuData(fetchedData); // Update the page with new data
+            } else {
+              console.log(
+                "Fetched data is the same as cached data. No update necessary."
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching menu data:", error);
+          });
+      };
+      const loadMenuData = (data) => {
+        const menuDiv = document.getElementById("menu");
+        menuDiv.innerHTML = ""; // Clear existing content
+        data.forEach((item) => {
+          menuDiv.innerHTML += `
                 <h2>${item.item}</h2>
                 <p>${item.description}</p>
                 <p>Price: ${item.price}</p>
               `;
-          });
-        };
-        document.addEventListener("DOMContentLoaded", () => {
-          // Check if menu data exists in local storage
-          let cachedMenuData = localStorage.getItem("menuData");
-          if (cachedMenuData) {
-            // Use cached data from local storage
-            loadMenuData(JSON.parse(cachedMenuData));
-          }
-          // Fetch fresh data in the background and compare
-          fetchMenuData();
         });
-      </script>
+      };
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check if menu data exists in local storage
+        let cachedMenuData = localStorage.getItem("menuData");
+        if (cachedMenuData) {
+          // Use cached data from local storage
+          loadMenuData(JSON.parse(cachedMenuData));
+        }
+        // Fetch fresh data in the background and compare
+        fetchMenuData();
+      });
+    </script>
   </body>
 </html>
