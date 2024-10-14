@@ -8,6 +8,33 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .door-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .door {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 2s, filter 2s;
+        cursor: pointer;
+      }
+      .door.opening {
+        transform: scale(1.5);
+        filter: brightness(0);
+      }
+      .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 10;
+      }
+    </style>
   </head>
   <body>
     <nav class="navbar">
@@ -17,17 +44,24 @@
       <ul class="nav-list">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <!-- <li><a href="classes.html">Classes</a></li> -->
         <li><a href="menu.html">Menu</a></li>
         <li><a href="orders.html">Order</a></li>
       </ul>
     </nav>
     <main>
-      <img src="Apt door.jpg" />
-      <h1 class="page-title">Welcome to the Apartment D Bakery</h1>
-      <h1 class="page-subtitle">Est. 2024</h1>
+      <div class="door-container">
+        <img
+          src="Apt door.jpg"
+          class="door"
+          id="doorImage"
+          alt="Apartment Door"
+        />
+        <div class="content">
+          <h1 class="page-title">Welcome to the Apartment D Bakery</h1>
+          <h1 class="page-subtitle">Est. 2024</h1>
+        </div>
+      </div>
     </main>
-
     <script>
       const fetchMenuData = () => {
         return fetch(
@@ -35,15 +69,22 @@
         )
           .then((response) => response.json())
           .then((data) => {
-            // Update the data in local storage every time the home page is loaded
             localStorage.setItem("menuData", JSON.stringify(data));
             console.log("Menu data updated in local storage.");
           })
           .catch((err) => console.error("Error fetching menu data:", err));
       };
-      // Preload and update menu data as soon as the user lands on the home page
+
       document.addEventListener("DOMContentLoaded", () => {
-        fetchMenuData(); // Always fetch and update the menu data
+        fetchMenuData();
+
+        const doorImage = document.getElementById("doorImage");
+        doorImage.addEventListener("click", () => {
+          doorImage.classList.add("opening");
+          setTimeout(() => {
+            window.location.href = "menu.html";
+          }, 2000); // Redirect after 2 seconds (matching the transition duration)
+        });
       });
     </script>
   </body>
