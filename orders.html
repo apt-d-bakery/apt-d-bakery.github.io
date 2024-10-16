@@ -45,7 +45,7 @@
 
         <label>
           Item: <span style="color: red">*</span>
-          <input type="text" name="item" id="itemDropdown" required>
+          <input type="text" name="item" placeholder="Classic sourdough" required>
           </select>
         </label>
         <br /> 
@@ -53,8 +53,15 @@
         <!-- Dropdown for Quantity Selection -->
         <label>
           Quantity: <span style="color: red">*</span>
-          <input type="text" name="quantity" id="quantityDropdown" required>
+          <input type="text" name="quantity" required>
           </select>
+        </label>
+        <br />
+
+        <!-- Email Field -->
+        <label>
+          Email: <span style="color: red">*</span>
+          <input type="email" name="email" required />
         </label>
         <br />
 
@@ -69,10 +76,14 @@
         </label>
         <br />
 
-        <!-- Email Field -->
+        <!-- Pick up location Field -->
         <label>
-          Email: <span style="color: red">*</span>
-          <input type="email" name="email" required />
+          Pick up location:
+          <input
+            type="text" 
+            name="pick up location"
+            placeholder="When I see you at ..."
+          />
         </label>
         <br />
 
