@@ -8,7 +8,72 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap"
       rel="stylesheet"
     />
+    <style>
+      /* Removed navbar styles to preserve your original CSS */
+
+      main {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .team-section {
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
+        margin-bottom: 3rem;
+      }
+
+      .team-member {
+        text-align: center;
+        max-width: 300px;
+      }
+
+      .profile-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        object-fit: cover;
+      }
+
+      .member-header {
+        font-size: 1.8rem;
+        margin: 0.3rem 0;
+      }
+
+      .member-name {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+      }
+
+      .member-title {
+        color: #666;
+        margin: 0;
+        font-style: italic;
+      }
+
+      .story-section {
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+    </style>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-WS4Q4LHF8X"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-WS4Q4LHF8X");
+  </script>
   <body>
     <nav class="navbar">
       <h1 class="logo">
@@ -17,31 +82,51 @@
       <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html" class="active">About</a></li>
-        <!-- <li><a href="classes.html">Classes</a></li> -->
         <li><a href="menu.html">Menu</a></li>
         <li><a href="orders.html">Order</a></li>
       </ul>
     </nav>
     <main>
-      <!-- <img class="project" src="Map.png" /> -->
-      <!-- <h1 class="page-subtitle">Located in San Luis Obispo, CA</h1> -->
-      <p>
-        It all started in a little apartment on Via Guerrazzi in Bologna, Italy
-        about two and a half years ago.
-      </p>
-      <p>
-        I wanted to bake bread while studying abroad because it's my passion and
-        it makes me happy.
-      </p>
-      <p>
-        So I started a sourdough starter, named him Benny (short for
-        Bentivoglio), and set up a makeshift dutch oven using a pot I found on
-        the side of the road.
-      </p>
-      <p>
-        Now, back in California, I wanted to share bread made from my Italian
-        starter with my friends and neighbors.
-      </p>
+      <div class="team-section">
+        <p class="member-header">Meet the Team</p>
+      </div>
+      <div class="team-section">
+        <div class="team-member">
+          <img src="IMG_8.jpg" alt="Elijah Macfarlane" class="profile-image" />
+          <h2 class="member-name">Elijah Macfarlane</h2>
+          <p class="member-title">
+            Founder / CEO / COO / Head Baker / Muscle / Just Another Pretty Face
+          </p>
+        </div>
+        <div class="team-member">
+          <img src="IMG_7.jpg" alt="Joe Macfarlane" class="profile-image" />
+          <h2 class="member-name">Joe Macfarlane</h2>
+          <p class="member-title">
+            Delivery Boy / Sales Rep / CFO / Business Consultant / Freelance
+            Website Designer
+          </p>
+        </div>
+      </div>
+
+      <div class="story-section">
+        <p>
+          It all started in a little apartment on Via Guerrazzi in Bologna,
+          Italy about two and a half years ago.
+        </p>
+        <p>
+          I wanted to bake bread while studying abroad because it's my passion
+          and it makes me happy.
+        </p>
+        <p>
+          So I started a sourdough starter, named him Benny (short for
+          Bentivoglio), and set up a makeshift dutch oven using a pot I found on
+          the side of the road.
+        </p>
+        <p>
+          Now, back in California, I wanted to share bread made from my Italian
+          starter with my friends and neighbors.
+        </p>
+      </div>
     </main>
   </body>
 </html>
